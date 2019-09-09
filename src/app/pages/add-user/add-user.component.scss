@@ -1,0 +1,33 @@
+form {
+    .formGroup {
+        margin-bottom: 1em;
+        input {
+            border-radius: .3em;
+            padding: 1em;
+            border: solid 1px rgba(128, 128, 128, .3);
+            width: inherit;
+        }
+        .errorPlaceHolder {
+            color: rgba(240, 1, 1, 1);
+            font-style: italic;
+            font-size: 0.8em;
+            p {
+                color: inherit;
+                font-style: inherit;
+                font-size: inherit;
+            }
+        }
+    }
+    button {
+        background: rgba(0, 0.8, 240);
+        width: 10em;
+        padding: 1em;
+        border-radius: 0.9em;
+        color: #fff;
+        text-transform: uppercase;
+        &.inactive {
+            background: rgba(128, 128, 128, 1);
+            color: rgb(0, 0, 0);
+        }
+    }
+}

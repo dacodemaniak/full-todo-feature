@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, FormControl, AbstractControl } from '@angular/forms';
+import { BirthDateValidatorService } from './../../shared/services/birth-date-validator.service';
 
 @Component({
   selector: 'app-add-user',
@@ -16,9 +18,90 @@ export class AddUserComponent implements OnInit {
    */
   public hasErrors: boolean = false;
 
-  constructor() { }
+  /**
+   * Form manager handled by ReactiveForms
+   */
+  public userForm: FormGroup;
 
-  ngOnInit() {
+  /**
+   *
+   * @param formBuilder As Dependency Injection
+   */
+  constructor(
+    private formBuilder: FormBuilder,
+    private birthDateValidator: BirthDateValidatorService
+  ) { }
+
+  /**
+   * Controls getter
+   */
+  public get name(): AbstractControl {
+    return this.userForm.controls.name;
   }
 
+  public get firstName(): AbstractControl {
+    return this.userForm.controls.firstName;
+  }
+
+  public get address(): AbstractControl {
+    return this.userForm.controls.address;
+  }
+  public get zipCode(): AbstractControl {
+    return this.userForm.controls.zipCode;
+  }
+
+  public get city(): AbstractControl {
+    return this.userForm.controls.city;
+  }
+
+  public get birthDate(): AbstractControl {
+    return this.userForm.controls.birthDate;
+  }
+  ngOnInit() {
+    // Instanciates a new FormGroup using FormBuilder
+    this.userForm = this.formBuilder.group({
+      name: [
+        '',
+        [Validators.required, Validators.minLength(3)]
+      ],
+      firstName: [
+        '',
+        Validators.required
+      ],
+      address: [
+        '',
+        Validators.required
+      ],
+      zipCode: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(5),
+          Validators.maxLength(5),
+          Validators.pattern('^(0|[1-9][0-9]*)$')
+        ]
+      ],
+      city: [
+        '',
+        Validators.required
+      ],
+      birthDate: [
+        '',
+        Validators.required,
+        this.birthDateValidator.isLowerThan.bind(this.birthDateValidator)
+      ]
+    });
+  }
+
+  public submit() {
+    console.log('Yo... Datas are : ' + JSON.stringify(this.userForm.value));
+
+    // First, instanciate a brand new User and feed with form values
+
+    // Second... (special thx for Felice) persist this user into persistent object
+
+    // Third, go back to home...
+
+    // Cherry on cake : put a toast to inform the end user...
+  }
 }

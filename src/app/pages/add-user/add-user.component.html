@@ -1,11 +1,12 @@
-<form>
+<form [formGroup]="userForm">
   <div class="formGroup">
     <input
       type="text"
       id="name"
+      formControlName="name"
       placeholder="Nom de l'utilisateur"
     >
-    <div class="errorPlaceHolder" [hidden]="!hasErrors">
+    <div class="errorPlaceHolder" *ngIf="name.errors && name.touched">
       Here... Some user errors alerts
     </div>
   </div>
@@ -14,9 +15,10 @@
     <input
       type="text"
       id="firstName"
+      formControlName="firstName"
       placeholder="Prénom de l'utilisateur"
     >
-    <div class="errorPlaceHolder" [hidden]="!hasErrors">
+    <div class="errorPlaceHolder" *ngIf="firstName.errors && firstName.touched">
       Here... Some user errors alerts
     </div>
   </div>
@@ -25,9 +27,10 @@
     <input
       type="text"
       id="address"
+      formControlName="address"
       placeholder="Adresse"
     >
-    <div class="errorPlaceHolder" [hidden]="!hasErrors">
+    <div class="errorPlaceHolder" *ngIf="address.errors && address.touched">
       Here... Some user errors alerts
     </div>
   </div>
@@ -36,10 +39,24 @@
     <input
       type="text"
       id="zipCode"
+      formControlName="zipCode"
       placeholder="Code postal"
     >
-    <div class="errorPlaceHolder" [hidden]="!hasErrors">
-      Here... Some user errors alerts
+    <div class="errorPlaceHolder" *ngIf="zipCode.errors && zipCode.touched">
+      <p *ngIf="zipCode.errors.required">
+        Le code postal est obligatoire
+      </p>
+      <p *ngIf="zipCode.errors.minlength">
+        Le code postal est constitué de 5 chiffres
+      </p>
+      <p *ngIf="zipCode.errors.maxlength">
+        Le code postal est constitué au maximum de 5 chiffres
+      </p>
+      <p *ngIf="zipCode.errors.pattern">
+        Le code postal est constitué de 5 chiffres
+        <br>
+        CHIIIIIFFFFFFRES
+      </p>
     </div>
   </div>
 
@@ -47,9 +64,10 @@
     <input
       type="text"
       id="city"
+      formControlName="city"
       placeholder="Ville"
     >
-    <div class="errorPlaceHolder" [hidden]="!hasErrors">
+    <div class="errorPlaceHolder" *ngIf="city.errors && city.touched">
       Here... Some user errors alerts
     </div>
   </div>
@@ -58,16 +76,24 @@
     <input
       type="date"
       id="birthDate"
+      formControlName="birthDate"
       placeholder="Date de naissance"
     >
-    <div class="errorPlaceHolder" [hidden]="!hasErrors">
-      Here... Some user errors alerts
+    <div class="errorPlaceHolder" *ngIf="birthDate.errors && birthDate.touched">
+      <p *ngIf="!birthDate.errors.isLowerThan">
+        La date de naissance doit (forcément...) être inférieure à la date du jour.
+      </p>
+      <p *ngIf="birthDate.errors.required">
+        La date de naissance est obligatoire.
+      </p>
     </div>
   </div>
 
   <div class="formGroup">
-    <button id="add" disabled>
+    <button id="add" (click)="submit()" [className]="userForm.invalid ? 'inactive' : ''" [disabled]="userForm.invalid">
       Ajouter
     </button>
   </div>
 </form>
+
+{{ userForm.value | json }}

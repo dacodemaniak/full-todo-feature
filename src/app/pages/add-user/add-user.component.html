@@ -1,0 +1,73 @@
+<form>
+  <div class="formGroup">
+    <input
+      type="text"
+      id="name"
+      placeholder="Nom de l'utilisateur"
+    >
+    <div class="errorPlaceHolder" [hidden]="!hasErrors">
+      Here... Some user errors alerts
+    </div>
+  </div>
+
+  <div class="formGroup">
+    <input
+      type="text"
+      id="firstName"
+      placeholder="Prénom de l'utilisateur"
+    >
+    <div class="errorPlaceHolder" [hidden]="!hasErrors">
+      Here... Some user errors alerts
+    </div>
+  </div>
+
+  <div class="formGroup">
+    <input
+      type="text"
+      id="address"
+      placeholder="Adresse"
+    >
+    <div class="errorPlaceHolder" [hidden]="!hasErrors">
+      Here... Some user errors alerts
+    </div>
+  </div>
+
+  <div class="formGroup">
+    <input
+      type="text"
+      id="zipCode"
+      placeholder="Code postal"
+    >
+    <div class="errorPlaceHolder" [hidden]="!hasErrors">
+      Here... Some user errors alerts
+    </div>
+  </div>
+
+  <div class="formGroup">
+    <input
+      type="text"
+      id="city"
+      placeholder="Ville"
+    >
+    <div class="errorPlaceHolder" [hidden]="!hasErrors">
+      Here... Some user errors alerts
+    </div>
+  </div>
+
+  <div class="formGroup">
+    <input
+      type="date"
+      id="birthDate"
+      placeholder="Date de naissance"
+    >
+    <div class="errorPlaceHolder" [hidden]="!hasErrors">
+      Here... Some user errors alerts
+    </div>
+  </div>
+
+  <div class="formGroup">
+    <button id="add" disabled>
+      Ajouter
+    </button>
+  </div>
+</form>

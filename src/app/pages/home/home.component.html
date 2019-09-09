@@ -1,0 +1,33 @@
+<!-- Interpolates controller public attributes -->
+<h1>{{ title }}</h1>
+
+<section>
+  <ul>
+    <li *ngFor="let user of users" [className]="user.isAddressHidden ? 'closed' : 'opened'">
+      <div class="container col"(click)="toggleStatus(user)">
+        <p>{{ user.firstName }} <span >{{ user.lastName | uppercase }}</span></p>
+        <p>Né(e) le : {{ user.birthDate | date: 'dd-MM-yyyy' }}</p>
+      </div>
+
+
+      <div class="container">
+        <a role="button">
+          <i class="icon-pencil"></i>
+        </a>
+        <a role="button">
+          <i class="icon-bin"></i>
+        </a>
+      </div>
+
+      <address [hidden]="user.isAddressHidden">
+          <p>{{ user.address }}</p>
+          <p>{{ user.zipCode }} {{ user.city }}</p>
+      </address>
+    </li>
+  </ul>
+</section>
+
+<!-- Bouton pour afficher le formulaire de création -->
+<a role="button" [routerLink]="['/add']">
+  Ajouter
+</a>

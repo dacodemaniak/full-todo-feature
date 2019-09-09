@@ -35,6 +35,11 @@ export class User {
    */
   private _city: string;
 
+  /**
+   * Manage visibility status of the address
+   * @var boolean
+   */
+  private _isAddressHidden: boolean = true;
 
   public get firstName(): string {
     return this._firstName;
@@ -76,5 +81,13 @@ export class User {
   }
   public set city(value: string) {
     this._city = value;
+  }
+
+  public get isAddressHidden(): boolean {
+    return this._isAddressHidden;
+  }
+
+  public set isAddressHidden(isHidden: boolean) {
+    this._isAddressHidden = isHidden;
   }
 }

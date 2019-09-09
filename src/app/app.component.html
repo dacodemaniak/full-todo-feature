@@ -1,11 +1,11 @@
-<!-- Interpolates controller public attributes -->
-<div>
-  {{ bond.firstName }} <span (click)="toggleStatus()">{{ bond.lastName | uppercase }}</span>
-  Birth date : {{ bond.birthDate | date: 'dd-MM-yyyy' }}
-  <address [hidden]="isAddressHidden">
-    <ul>
-      <li>{{ bond.address }}</li>
-      <li>{{ bond.zipCode }} {{ bond.city }}</li>
-    </ul>
-  </address>
+<div class="container">
+  <header>
+    Here comes the sun
+  </header>
+
+  <router-outlet></router-outlet>
+
+  <footer>
+    That's all folks!
+  </footer>
 </div>

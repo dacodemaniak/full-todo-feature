@@ -1,4 +1,9 @@
 import { User } from './user';
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
 
 export class UserCollection {
   private _users: Array<User>;
@@ -9,6 +14,37 @@ export class UserCollection {
 
     // Hydrate the collection with some dummy datas
     this._hydrate();
+  }
+
+  /**
+   * Adds a user in the collection
+   * @param user User to be added
+   */
+  public add(user: User): UserCollection {
+    return this;
+  }
+
+  /**
+   * Gets a user from the collection
+   */
+  public get(): User {
+    return null;
+  }
+
+  /**
+   * Update a user in the collection
+   * @param user User updated
+   */
+  public update(user: User): UserCollection {
+    return this;
+  }
+
+  /**
+   * Removes a user from the collection
+   * @param user The user to be deleted
+   */
+  public remove(user: User): UserCollection {
+    return this;
   }
 
   /**
@@ -28,6 +64,7 @@ export class UserCollection {
       user.isAddressHidden = true;
     });
   }
+
   private _hydrate(): void {
     // Push a new User into the collection
     let user: User = new User(); // Sets a variable named user

@@ -11,19 +11,15 @@ import { UserCollection } from './../../models/user-collection';
 export class HomeComponent implements OnInit {
 
   /**
-   * Collection of some users
-   * @var UserCollection
-   */
-  private collection: UserCollection = new UserCollection();
-
-  /**
    * The collection...
    */
   public users: Array<User>;
 
   public title: String = new String('Utilisateurs');
 
-  public constructor() {}
+  public constructor(
+    private collection: UserCollection
+  ) {}
 
   /**
    * Invoked just after the component constructor

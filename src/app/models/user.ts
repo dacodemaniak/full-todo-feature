@@ -90,4 +90,14 @@ export class User {
   public set isAddressHidden(isHidden: boolean) {
     this._isAddressHidden = isHidden;
   }
+
+  /**
+   * Deserializes anonymous user to hydrate and return
+   * a Full Qualified User
+   * @param user
+   */
+  public transform(user: any): User {
+    Object.assign(this, user);
+    return this;
+  }
 }

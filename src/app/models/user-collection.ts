@@ -1,5 +1,6 @@
 import { User } from './user';
 import { Injectable } from '@angular/core';
+import { LocalStorageService } from '../shared/services/local-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ import { Injectable } from '@angular/core';
 export class UserCollection {
   private _users: Array<User>;
 
-  public constructor() {
+  public constructor(private storage: LocalStorageService) {
     // Instanciates the users Array
     this._users = new Array<User>();
 
@@ -21,6 +22,11 @@ export class UserCollection {
    * @param user User to be added
    */
   public add(user: User): UserCollection {
+    this._users.push(user); // Add an element to the array
+
+    // Just persist all...
+    this.storage.set('users', this._users);
+
     return this;
   }
 
@@ -44,6 +50,16 @@ export class UserCollection {
    * @param user The user to be deleted
    */
   public remove(user: User): UserCollection {
+    // Gets the index value of "user" in the array
+    const index: number = this._users.indexOf(user);
+
+    // If found (index <> -1)
+    if (index !== -1) {
+      this._users.splice(index, 1); // Removes the index
+    }
+    // Invoke the persistent method
+    this.storage.set('users', this._users);
+
     return this;
   }
 
@@ -65,41 +81,19 @@ export class UserCollection {
     });
   }
 
+  /**
+   * Retrieve anonymous collection of things...
+   * Just think to make real User
+   */
   private _hydrate(): void {
-    // Push a new User into the collection
-    let user: User = new User(); // Sets a variable named user
-    // Define this user...
-    user.firstName = 'James';
-    user.lastName = 'Bond';
-    user.address = '10, Downing Street';
-    user.city = 'London';
-    user.zipCode = '00000';
-    user.birthDate = new Date('1943-04-12');
-
-    // Push this user into collection
-    this._users.push(user);
-
-    // Define another user
-    user = new User();
-    user.firstName = 'Jean';
-    user.lastName = 'Talut';
-    user.address = '22, rue de la Mécanique';
-    user.city = 'Montpellier';
-    user.zipCode = '34000';
-    user.birthDate = new Date('1981-05-10');
-
-    this._users.push(user);
-
-    // Define another user
-    user = new User();
-    user.firstName = 'Nicole';
-    user.lastName = 'Scakolsanskotcz';
-    user.address = '15, Bd de la République';
-    user.city = 'Toulouse';
-    user.zipCode = '31000';
-    user.birthDate = new Date('1962-10-20');
-
-    this._users.push(user);
-
+    const users: Array<any> = this.storage.get('users');
+    if (users.length) {
+      users.forEach((user: any, index: number) => {
+        let transformedUser: User = new User();
+        this._users.push(transformedUser.transform(user));
+        // or...
+        //this._users.push(new User().transform(user));
+      });
+    }
   }
 }

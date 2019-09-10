@@ -30,6 +30,14 @@ export class HomeComponent implements OnInit {
   }
 
   /**
+   * Invoke repository method to remove the 'user'
+   * @param user User to remove
+   */
+  public remove(user: User): void {
+    this.collection.remove(user);
+  }
+
+  /**
    * Toggle the hidden status of the address
    * @return void
    */

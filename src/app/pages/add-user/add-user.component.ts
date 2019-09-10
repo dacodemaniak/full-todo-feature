@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl, AbstractControl } from '@angular/forms';
 import { BirthDateValidatorService } from './../../shared/services/birth-date-validator.service';
+import { UserCollection } from 'src/app/models/user-collection';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-add-user',
@@ -29,7 +31,8 @@ export class AddUserComponent implements OnInit {
    */
   constructor(
     private formBuilder: FormBuilder,
-    private birthDateValidator: BirthDateValidatorService
+    private birthDateValidator: BirthDateValidatorService,
+    private collection: UserCollection
   ) { }
 
   /**
@@ -97,8 +100,16 @@ export class AddUserComponent implements OnInit {
     console.log('Yo... Datas are : ' + JSON.stringify(this.userForm.value));
 
     // First, instanciate a brand new User and feed with form values
+    const brandNewUser: User = new User();
+    brandNewUser.lastName = this.name.value;
+    brandNewUser.firstName = this.firstName.value;
+    brandNewUser.address = this.address.value;
+    brandNewUser.city = this.city.value;
+    brandNewUser.zipCode = this.zipCode.value;
+    brandNewUser.birthDate = this.birthDate.value;
 
     // Second... (special thx for Felice) persist this user into persistent object
+    this.collection.add(brandNewUser);
 
     // Third, go back to home...
 

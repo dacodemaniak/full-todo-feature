@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { User } from './../../models/user';
 import { UserCollection } from './../../models/user-collection';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +19,8 @@ export class HomeComponent implements OnInit {
   public title: String = new String('Utilisateurs');
 
   public constructor(
-    private collection: UserCollection
+    private collection: UserCollection,
+    private toaster: ToastrService
   ) {}
 
   /**
@@ -35,6 +37,10 @@ export class HomeComponent implements OnInit {
    */
   public remove(user: User): void {
     this.collection.remove(user);
+    this.toaster.warning(
+      'L\'utilisateur ' + user.lastName + ' a bien été supprimé.',
+      'Suppression'
+    );
   }
 
   /**

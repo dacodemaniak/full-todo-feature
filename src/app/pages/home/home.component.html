@@ -3,14 +3,18 @@
 
 <section>
   <ul>
-    <li *ngFor="let user of users" [className]="user.isAddressHidden ? 'closed' : 'opened'">
-      <div class="container col"(click)="toggleStatus(user)">
+    <li *ngFor="let user of users" [ngClass]="{'row': true, 'closed': user.isAddressHidden, 'opened':!user.isAddressHidden}">
+      <div class="col-sm"(click)="toggleStatus(user)">
         <p>{{ user.firstName }} <span >{{ user.lastName | uppercase }}</span></p>
         <p>Né(e) le : {{ user.birthDate | date: 'dd-MM-yyyy' }}</p>
       </div>
 
+      <address [hidden]="user.isAddressHidden" class="col-sm">
+          <p>{{ user.address }}</p>
+          <p>{{ user.zipCode }} {{ user.city }}</p>
+      </address>
 
-      <div class="container">
+      <div class="col-sm">
         <a role="button">
           <i class="icon-pencil"></i>
         </a>
@@ -18,16 +22,11 @@
           <i class="icon-bin"></i>
         </a>
       </div>
-
-      <address [hidden]="user.isAddressHidden">
-          <p>{{ user.address }}</p>
-          <p>{{ user.zipCode }} {{ user.city }}</p>
-      </address>
     </li>
   </ul>
 </section>
 
 <!-- Bouton pour afficher le formulaire de création -->
-<a role="button" [routerLink]="['/add']">
+<a class="btn btn-outline-primary" role="button" [routerLink]="['/add']">
   Ajouter
 </a>

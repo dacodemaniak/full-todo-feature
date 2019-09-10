@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormControl, AbstractControl } from
 import { BirthDateValidatorService } from './../../shared/services/birth-date-validator.service';
 import { UserCollection } from 'src/app/models/user-collection';
 import { User } from 'src/app/models/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-user',
@@ -32,7 +33,8 @@ export class AddUserComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private birthDateValidator: BirthDateValidatorService,
-    private collection: UserCollection
+    private collection: UserCollection,
+    private router: Router
   ) { }
 
   /**
@@ -112,6 +114,7 @@ export class AddUserComponent implements OnInit {
     this.collection.add(brandNewUser);
 
     // Third, go back to home...
+    this.router.navigate(['']);
 
     // Cherry on cake : put a toast to inform the end user...
   }

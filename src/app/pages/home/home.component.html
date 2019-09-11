@@ -15,18 +15,21 @@
       </address>
 
       <div class="col-sm">
-        <a role="button">
+        <button [disabled]="hasUser()" (click)="loadFormFor(user)">
           <i class="icon-pencil"></i>
-        </a>
-        <a role="button" (click)="remove(user)">
+        </button>
+        <button role="button" [disabled]="hasUser()" (click)="remove(user)">
           <i class="icon-bin"></i>
-        </a>
+        </button>
       </div>
     </li>
   </ul>
 </section>
 
 <!-- Bouton pour afficher le formulaire de création -->
-<a class="btn btn-outline-primary" role="button" [routerLink]="['/add']">
+<button class="btn btn-outline-primary" [disabled]="hasUser()" [routerLink]="['/add']">
   Ajouter
-</a>
+</button>
+
+<!-- Ajouter le composant de mise à jour ? -->
+<app-update-user (updateUserEvent)="receiveUser($event)" [userForm]="userForm" [hidden]="!hasUser()"></app-update-user>

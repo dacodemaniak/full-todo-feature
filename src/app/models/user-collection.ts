@@ -39,9 +39,16 @@ export class UserCollection {
 
   /**
    * Update a user in the collection
-   * @param user User updated
+   * @param user original User
+   * @param newUser Modified User
    */
-  public update(user: User): UserCollection {
+  public update(user: User, newUser: User): UserCollection {
+    const index: number = this._users.indexOf(user);
+    this._users[index] = newUser;
+
+    // Don't forget to persist
+    this.storage.set('users', this._users);
+
     return this;
   }
 

@@ -1,0 +1,104 @@
+<form *ngIf="userForm" [formGroup]="userForm" >
+  <div class="formGroup">
+    <input
+      type="text"
+      id="name"
+      formControlName="lastName"
+      placeholder="Nom de l'utilisateur"
+    >
+    <div class="errorPlaceHolder" *ngIf="lastName.errors && lastName.touched">
+      Here... Some user errors alerts
+    </div>
+  </div>
+
+  <div class="formGroup">
+    <input
+      type="text"
+      id="firstName"
+      formControlName="firstName"
+      placeholder="Prénom de l'utilisateur"
+    >
+    <div class="errorPlaceHolder" *ngIf="firstName.errors && firstName.touched">
+      Here... Some user errors alerts
+    </div>
+  </div>
+
+  <div class="formGroup">
+    <input
+      type="text"
+      id="address"
+      formControlName="address"
+      placeholder="Adresse"
+    >
+    <div class="errorPlaceHolder" *ngIf="address.errors && address.touched">
+      Here... Some user errors alerts
+    </div>
+  </div>
+
+  <div class="formGroup">
+    <input
+      type="text"
+      id="zipCode"
+      formControlName="zipCode"
+      placeholder="Code postal"
+    >
+    <div class="errorPlaceHolder" *ngIf="zipCode.errors && zipCode.touched">
+      <p *ngIf="zipCode.errors.required">
+        Le code postal est obligatoire
+      </p>
+      <p *ngIf="zipCode.errors.minlength">
+        Le code postal est constitué de 5 chiffres
+      </p>
+      <p *ngIf="zipCode.errors.maxlength">
+        Le code postal est constitué au maximum de 5 chiffres
+      </p>
+      <p *ngIf="zipCode.errors.pattern">
+        Le code postal est constitué de 5 chiffres
+        <br>
+        CHIIIIIFFFFFFRES
+      </p>
+    </div>
+  </div>
+
+  <div class="formGroup">
+    <input
+      type="text"
+      id="city"
+      formControlName="city"
+      placeholder="Ville"
+    >
+    <div class="errorPlaceHolder" *ngIf="city.errors && city.touched">
+      Here... Some user errors alerts
+    </div>
+  </div>
+
+  <div class="formGroup">
+    <input
+      type="date"
+      id="birthDate"
+      formControlName="birthDate"
+      placeholder="Date de naissance"
+    >
+    <div class="errorPlaceHolder" *ngIf="birthDate.errors && birthDate.touched">
+      <p *ngIf="!birthDate.errors.isLowerThan">
+        La date de naissance doit (forcément...) être inférieure à la date du jour.
+      </p>
+      <p *ngIf="birthDate.errors.required">
+        La date de naissance est obligatoire.
+      </p>
+    </div>
+  </div>
+
+  <div class="formGroup">
+    <button
+    [ngClass]="{'btn': true, 'btn-success': true}"
+    id="update" (click)="submit()" [disabled]="userForm.invalid">
+      Mettre à jour
+    </button>
+
+    <button class="btn btn-outline-warning" id="cancel" (click)="dismiss()">
+      Annuler
+    </button>
+  </div>
+  {{ userForm.value | json }}
+</form>

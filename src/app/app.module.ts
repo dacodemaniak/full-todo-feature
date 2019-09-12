@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { AddUserComponent } from './pages/add-user/add-user.component';
 import { HomeComponent } from './pages/home/home.component';
 import { UpdateUserComponent } from './pages/update-user/update-user.component';
+import { MaterialModule } from './shared/ui/material/material.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { UpdateUserComponent } from './pages/update-user/update-user.component';
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]

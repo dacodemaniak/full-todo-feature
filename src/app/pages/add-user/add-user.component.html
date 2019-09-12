@@ -1,15 +1,15 @@
 <form [formGroup]="userForm">
-  <div class="formGroup">
+  <mat-form-field>
     <input
-      type="text"
-      id="name"
+      matInput
       formControlName="name"
       placeholder="Nom de l'utilisateur"
     >
+  </mat-form-field>
     <div class="errorPlaceHolder" *ngIf="name.errors && name.touched">
       Here... Some user errors alerts
     </div>
-  </div>
+
 
   <div class="formGroup">
     <input

@@ -6,7 +6,7 @@
     <li *ngFor="let user of users" [ngClass]="{'row': true, 'closed': user.isAddressHidden, 'opened':!user.isAddressHidden}">
       <div class="col-sm"(click)="toggleStatus(user)">
         <p>{{ user.firstName }} <span >{{ user.lastName | uppercase }}</span></p>
-        <p>Né(e) le : {{ user.birthDate | date: 'dd-MM-yyyy' }}</p>
+        <p>Né(e) le : {{ user.birthDate | date: 'dd-MM-yyyy' }} [ {{ user.birthDate | age: {format: 'month', pluralize: true} }} ]</p>
       </div>
 
       <address [hidden]="user.isAddressHidden" class="col-sm">

@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
   /**
    * The form i want to share with the children component
    */
-  private userForm: FormGroup;
+  public userForm: FormGroup;
 
   /**
    * The user who was selected for update

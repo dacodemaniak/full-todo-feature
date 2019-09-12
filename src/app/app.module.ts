@@ -12,13 +12,15 @@ import { AppComponent } from './app.component';
 import { AddUserComponent } from './pages/add-user/add-user.component';
 import { HomeComponent } from './pages/home/home.component';
 import { UpdateUserComponent } from './pages/update-user/update-user.component';
+import { AgePipe } from './shared/pipes/age.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     AddUserComponent,
     HomeComponent,
-    UpdateUserComponent
+    UpdateUserComponent,
+    AgePipe
   ],
   imports: [
     BrowserModule,

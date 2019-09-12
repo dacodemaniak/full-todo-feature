@@ -12,14 +12,15 @@ import { AppComponent } from './app.component';
 import { AddUserComponent } from './pages/add-user/add-user.component';
 import { HomeComponent } from './pages/home/home.component';
 import { UpdateUserComponent } from './pages/update-user/update-user.component';
-import { MaterialModule } from './shared/ui/material/material.module';
+import { AgePipe } from './shared/pipes/age.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     AddUserComponent,
     HomeComponent,
-    UpdateUserComponent
+    UpdateUserComponent,
+    AgePipe
   ],
   imports: [
     BrowserModule,
@@ -27,8 +28,7 @@ import { MaterialModule } from './shared/ui/material/material.module';
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
-    MaterialModule
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

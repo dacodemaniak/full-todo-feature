@@ -13,6 +13,7 @@ import { AddUserComponent } from './pages/add-user/add-user.component';
 import { HomeComponent } from './pages/home/home.component';
 import { UpdateUserComponent } from './pages/update-user/update-user.component';
 import { AgePipe } from './shared/pipes/age.pipe';
+import { MaterialModule } from './shared/ui/material/material.module';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { AgePipe } from './shared/pipes/age.pipe';
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]

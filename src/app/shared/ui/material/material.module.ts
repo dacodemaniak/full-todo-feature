@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-  MatInputModule
+  MatInputModule, MatProgressSpinnerModule
 } from '@angular/material';
 
 
@@ -9,10 +9,12 @@ import {
   declarations: [],
   imports: [
     CommonModule,
-    MatInputModule
+    MatInputModule,
+    MatProgressSpinnerModule
   ],
   exports: [
-    MatInputModule
+    MatInputModule,
+    MatProgressSpinnerModule
   ]
 })
 export class MaterialModule { }

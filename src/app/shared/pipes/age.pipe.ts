@@ -2,20 +2,19 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 // Import the whole moment package from node_modules/moment
 import * as moment from 'moment';
+import { HttpClient } from '@angular/common/http';
 
 @Pipe({
   name: 'age'
 })
 export class AgePipe implements PipeTransform {
 
+  public constructor(private httpClient: HttpClient) {}
 
-  transform(value: any, ...args: any[]): any {
-    // Fake current date
-    const today: moment.Moment = moment();
+  transform(value: any, ...args: any[]): Promise<string> {
 
     let format: moment.unitOfTime.Diff = 'year';
     let pluralize: boolean = false;
-
 
     // What's args...
     if (args) {
@@ -26,15 +25,40 @@ export class AgePipe implements PipeTransform {
        }
     }
 
-    // Convert string date in Moment date (value <=> user.birthDate for example)
-    const birthDate: moment.Moment = moment(value);
+    return this.getTheAgeOfTheCaptain(
+      value,
+      format,
+      pluralize
+    );
 
-    // Get difference between two dates with moment
-    const theAge: number = today.diff(birthDate, format);
 
-    return this.toString(theAge, pluralize, format.toString());
   }
 
+  private getTheAgeOfTheCaptain(
+      fromThePipe: string,
+      format: moment.unitOfTime.Diff,
+      pluralize: boolean
+  ): Promise<any> {
+
+    let today: moment.Moment;
+
+    return new Promise((resolve) => {
+      this.httpClient.get<any>(
+        'http://worldclockapi.com/api/json/utc/now'
+      ).subscribe((response: any) => {
+        today = moment(response.currentDateTime);
+        const birthDate: moment.Moment = moment(fromThePipe);
+
+        // Get difference between two dates with moment
+        const theAge: number = today.diff(birthDate, format);
+
+        const output: string =  this.toString(theAge, pluralize, format.toString());
+        resolve(output);
+      }, (error) => {
+        resolve(fromThePipe);
+      });
+    });
+  }
   private toString(age: number, pluralize: boolean, format: string) {
     if (age <= 1) {
       if (pluralize) {

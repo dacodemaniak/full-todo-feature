@@ -14,6 +14,9 @@ import { HomeComponent } from './pages/home/home.component';
 import { UpdateUserComponent } from './pages/update-user/update-user.component';
 import { AgePipe } from './shared/pipes/age.pipe';
 import { MaterialModule } from './shared/ui/material/material.module';
+import { ToolbarComponent } from './shared/components/toolbar/toolbar.component';
+import { DeleteDialogComponent } from './shared/components/delete-dialog/delete-dialog.component';
+import { AddTodolistComponent } from './pages/add-todolist/add-todolist.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,10 @@ import { MaterialModule } from './shared/ui/material/material.module';
     AddUserComponent,
     HomeComponent,
     UpdateUserComponent,
-    AgePipe
+    AgePipe,
+    ToolbarComponent,
+    DeleteDialogComponent,
+    AddTodolistComponent
   ],
   imports: [
     BrowserModule,
@@ -33,6 +39,9 @@ import { MaterialModule } from './shared/ui/material/material.module';
     MaterialModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    DeleteDialogComponent
+  ]
 })
 export class AppModule { }

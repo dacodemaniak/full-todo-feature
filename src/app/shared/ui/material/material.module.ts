@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-  MatInputModule, MatProgressSpinnerModule
+  MatInputModule, MatProgressSpinnerModule, MatGridListModule, MatIconModule, MatButtonModule, MatToolbarModule, MatDialogModule
 } from '@angular/material';
 
 
@@ -10,11 +10,21 @@ import {
   imports: [
     CommonModule,
     MatInputModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatGridListModule,
+    MatButtonModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatDialogModule
   ],
   exports: [
     MatInputModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatGridListModule,
+    MatButtonModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatDialogModule
   ]
 })
 export class MaterialModule { }

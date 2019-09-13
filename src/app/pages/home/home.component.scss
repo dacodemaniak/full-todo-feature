@@ -1,37 +1,20 @@
 @import "./../../shared/styles/_variables";
-div {
-    span {
-        color: hsla(128, 15%, 20%, 1);
-    }
-}
-
-section {
-    ul {
-        &:first-child {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
+mat-grid-list {
+    div {
+        .wrapper {
+            height: 15em;
+            &.active {
+                background-color: $inversed;
+            }
         }
-        li {
-            a[role="button"] {
-                border-radius: 3em;
-                background: rgba(0, 0, 204, 0.7);
-                padding: 1em;
-                color: #fff;
-            }
-            &.closed {
-                background: $fadded;
-            }
-            &.opened {
-                background: $inversed;
-                p,
-                address {
-                    color: $fadded;
-                }
-            }
-            padding: 2em;
-            border-radius: .25em;
-            margin-bottom: .5em;
+    }
+    &.mat-grid-list {
+        background-color: $info;
+    }
+    .mat-grid-tile {
+        &.active {
+            background-color: $inversed;
+            color: $fadded;
         }
     }
 }

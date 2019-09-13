@@ -5,6 +5,8 @@ import { UserCollection } from './../../models/user-collection';
 import { ToastrService } from 'ngx-toastr';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { BirthDateValidatorService } from './../../shared/services/birth-date-validator.service';
+import { MatDialog } from '@angular/material';
+import { DeleteDialogComponent } from './../../shared/components/delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-home',
@@ -35,6 +37,7 @@ export class HomeComponent implements OnInit {
     private toaster: ToastrService,
     private formBuilder: FormBuilder,
     private birthDateValidator: BirthDateValidatorService,
+    private dialog: MatDialog
   ) {}
 
   /**
@@ -68,11 +71,22 @@ export class HomeComponent implements OnInit {
    * @param user User to remove
    */
   public remove(user: User): void {
-    this.collection.remove(user);
-    this.toaster.warning(
-      'L\'utilisateur ' + user.lastName + ' a bien été supprimé.',
-      'Suppression'
-    );
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {
+      width: '250px',
+      data: user
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed : ' + JSON.stringify(result));
+      if (result) {
+        this.collection.remove(user);
+        this.toaster.warning(
+          'L\'utilisateur ' + user.lastName + ' a bien été supprimé.',
+          'Suppression'
+        );
+      }
+    });
+
   }
 
   /**

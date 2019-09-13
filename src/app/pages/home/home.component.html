@@ -1,34 +1,63 @@
 <!-- Interpolates controller public attributes -->
 <h1>{{ title }}</h1>
 
-<section>
-  <ul>
-    <li *ngFor="let user of users" [ngClass]="{'row': true, 'closed': user.isAddressHidden, 'opened':!user.isAddressHidden}">
-      <div class="col-sm"(click)="toggleStatus(user)">
-        <p>{{ user.firstName }} <span >{{ user.lastName | uppercase }}</span></p>
-        <p>Né(e) le : {{ user.birthDate | date: 'dd-MM-yyyy' }}
-        [ {{ user.birthDate | age: {format: 'year', pluralize: true} | async }} ]</p>
+<mat-grid-list cols="7" rowHeight="100px">
+  <div class="wrapper"
+    *ngFor="let user of users"
+  >
+    <mat-grid-tile
+      [colspan]="3"
+      (click)="toggleStatus(user)"
+      [ngClass]="{'active': !user.isAddressHidden}"
+    >
+      <div>
+        {{ user.firstName }}
+        {{ user.lastName }}
+
+        <mat-icon
+          *ngIf="user.isAddressHidden"
+        >
+          redo
+        </mat-icon>
+
+        <mat-icon
+          *ngIf="!user.isAddressHidden"
+        >
+          undo
+        </mat-icon>
       </div>
 
+      <div>Né(e) le : {{ user.birthDate | date: 'dd-MM-yyyy' }}
+        [ {{ user.birthDate | age: {format: 'year', pluralize: true} | async }} ]
+      </div>
+
+    </mat-grid-tile>
+
+    <mat-grid-tile
+      [ngClass]="{'active': !user.isAddressHidden}"
+      [colspan]="2"
+    >
       <address [hidden]="user.isAddressHidden" class="col-sm">
           <p>{{ user.address }}</p>
           <p>{{ user.zipCode }} {{ user.city }}</p>
       </address>
+    </mat-grid-tile>
 
-      <div class="col-sm">
-        <button [disabled]="hasUser()" (click)="loadFormFor(user)">
-          <i class="icon-pencil"></i>
+    <mat-grid-tile
+      [ngClass]="{'active': !user.isAddressHidden}"
+    >
+        <button mat-fab color="primary" [disabled]="hasUser()" (click)="loadFormFor(user)">
+          <mat-icon>open_in_new</mat-icon>
         </button>
-        <button role="button" [disabled]="hasUser()" (click)="remove(user)">
-          <i class="icon-bin"></i>
+        <button mat-fab color="warn" [disabled]="hasUser()" (click)="remove(user)">
+          <mat-icon>delete_forever</mat-icon>
         </button>
-      </div>
-    </li>
-  </ul>
-</section>
+    </mat-grid-tile>
+  </div>
+</mat-grid-list>
 
 <!-- Bouton pour afficher le formulaire de création -->
-<button class="btn btn-outline-primary" [disabled]="hasUser()" [routerLink]="['/add']">
+<button mat-button color="primary" [disabled]="hasUser()" [routerLink]="['/add']">
   Ajouter
 </button>
 

@@ -1,48 +1,54 @@
 <form [formGroup]="userForm">
-  <mat-form-field>
+
+  <mat-form-field class="full-width">
     <input
       matInput
       formControlName="name"
       placeholder="Nom de l'utilisateur"
     >
   </mat-form-field>
-    <div class="errorPlaceHolder" *ngIf="name.errors && name.touched">
-      Here... Some user errors alerts
-    </div>
+  <div class="errorPlaceHolder" *ngIf="name.errors && name.touched">
+    Here... Some user errors alerts
+  </div>
 
 
-  <div class="formGroup">
+  <mat-form-field class="full-width">
     <input
+      matInput
       type="text"
-      id="firstName"
       formControlName="firstName"
       placeholder="Prénom de l'utilisateur"
     >
-    <div class="errorPlaceHolder" *ngIf="firstName.errors && firstName.touched">
+  </mat-form-field>
+
+  <div class="errorPlaceHolder" *ngIf="firstName.errors && firstName.touched">
       Here... Some user errors alerts
-    </div>
   </div>
 
-  <div class="formGroup">
+  <mat-form-field class="full-width">
     <input
+      matInput
       type="text"
       id="address"
       formControlName="address"
       placeholder="Adresse"
     >
-    <div class="errorPlaceHolder" *ngIf="address.errors && address.touched">
-      Here... Some user errors alerts
-    </div>
+  </mat-form-field>
+  <div class="errorPlaceHolder" *ngIf="address.errors && address.touched">
+    Here... Some user errors alerts
   </div>
 
-  <div class="formGroup">
+  <mat-form-field class="full-width">
     <input
+      matInput
       type="text"
       id="zipCode"
       formControlName="zipCode"
       placeholder="Code postal"
     >
-    <div class="errorPlaceHolder" *ngIf="zipCode.errors && zipCode.touched">
+
+  </mat-form-field>
+  <div class="errorPlaceHolder" *ngIf="zipCode.errors && zipCode.touched">
       <p *ngIf="zipCode.errors.required">
         Le code postal est obligatoire
       </p>
@@ -57,28 +63,31 @@
         <br>
         CHIIIIIFFFFFFRES
       </p>
-    </div>
   </div>
 
-  <div class="formGroup">
+  <mat-form-field class="full-width">
     <input
+      matInput
       type="text"
       id="city"
       formControlName="city"
       placeholder="Ville"
     >
-    <div class="errorPlaceHolder" *ngIf="city.errors && city.touched">
-      Here... Some user errors alerts
-    </div>
+
+  </mat-form-field>
+  <div class="errorPlaceHolder" *ngIf="city.errors && city.touched">
+    Here... Some user errors alerts
   </div>
 
-  <div class="formGroup">
+  <mat-form-field class="full-width">
     <input
+      matInput
       type="date"
       id="birthDate"
       formControlName="birthDate"
       placeholder="Date de naissance"
     >
+  </mat-form-field>
     <div class="errorPlaceHolder" *ngIf="birthDate.errors && birthDate.touched">
       <p *ngIf="!birthDate.errors.isLowerThan">
         La date de naissance doit (forcément...) être inférieure à la date du jour.
@@ -87,13 +96,9 @@
         La date de naissance est obligatoire.
       </p>
     </div>
-  </div>
-
   <div class="formGroup">
-    <button id="add" (click)="submit()" [className]="userForm.invalid ? 'inactive' : ''" [disabled]="userForm.invalid">
+    <button mat-button color="primary" id="add" (click)="submit()" [className]="userForm.invalid ? 'inactive' : ''" [disabled]="userForm.invalid">
       Ajouter
     </button>
   </div>
 </form>
-
-{{ userForm.value | json }}

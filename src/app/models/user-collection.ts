@@ -1,6 +1,7 @@
 import { User } from './user';
 import { Injectable } from '@angular/core';
 import { LocalStorageService } from '../shared/services/local-storage.service';
+import { Observable, from } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,12 +10,15 @@ import { LocalStorageService } from '../shared/services/local-storage.service';
 export class UserCollection {
   private _users: Array<User>;
 
+  private _isReady: boolean = false;
+
   public constructor(private storage: LocalStorageService) {
     // Instanciates the users Array
     this._users = new Array<User>();
+  }
 
-    // Hydrate the collection with some dummy datas
-    this._hydrate();
+  public isReady(): boolean {
+    return this._isReady;
   }
 
   /**
@@ -74,8 +78,8 @@ export class UserCollection {
    * Gets the collection of users
    * @return Array<User>
    */
-  public getCollection(): Array<User> {
-    return this._users;
+  public getCollection(): Promise<Array<User>> {
+    return this._hydrate();
   }
 
   public get users(): Array<User> {
@@ -92,15 +96,28 @@ export class UserCollection {
    * Retrieve anonymous collection of things...
    * Just think to make real User
    */
-  private _hydrate(): void {
-    const users: Array<any> = this.storage.get('users');
-    if (users.length) {
-      users.forEach((user: any, index: number) => {
-        let transformedUser: User = new User();
-        this._users.push(transformedUser.transform(user));
-        // or...
-        //this._users.push(new User().transform(user));
+  private _hydrate(): Promise<Array<User>> {
+
+    return new Promise((resolve) => {
+      let users: Array<any> = new Array<any>();
+
+      this.storage.get('users').then((datas: Array<any>) => {
+        console.log('Users from storage : ' + JSON.stringify(datas));
+        users = datas;
+        if (users.length) {
+          users.forEach((user: any, index: number) => {
+            let transformedUser: User = new User();
+            this._users.push(transformedUser.transform(user));
+          });
+        }
+
+        setTimeout(() => {
+          this._isReady = true;
+          resolve(this._users);
+          console.log('Users are ready ' + this._users.length);
+        }, 2000);
+
       });
-    }
+    });
   }
 }

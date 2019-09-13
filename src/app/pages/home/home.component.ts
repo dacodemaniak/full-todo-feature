@@ -32,6 +32,8 @@ export class HomeComponent implements OnInit {
    */
   public aUser: User;
 
+  public isReady: boolean = false;
+
   public constructor(
     private collection: UserCollection,
     private toaster: ToastrService,
@@ -44,8 +46,11 @@ export class HomeComponent implements OnInit {
    * Invoked just after the component constructor
    */
   ngOnInit(): void {
-    this.users = this.collection.getCollection();
-    // or... this.users = this.collection.users;
+    this.collection.getCollection().then((users) => {
+      this.users = users;
+      console.log('Wtf : ' + JSON.stringify(this.users));
+      this.isReady = true;
+    });
   }
 
   /**

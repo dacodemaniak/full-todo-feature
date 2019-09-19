@@ -17,6 +17,7 @@ import { MaterialModule } from './shared/ui/material/material.module';
 import { ToolbarComponent } from './shared/components/toolbar/toolbar.component';
 import { DeleteDialogComponent } from './shared/components/delete-dialog/delete-dialog.component';
 import { AddTodolistComponent } from './pages/add-todolist/add-todolist.component';
+import { LoginComponent } from './pages/login/login.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { AddTodolistComponent } from './pages/add-todolist/add-todolist.componen
     AgePipe,
     ToolbarComponent,
     DeleteDialogComponent,
-    AddTodolistComponent
+    AddTodolistComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

@@ -38,6 +38,27 @@ export class TodoListsService implements RepositoryInterface<TodoList> {
     this.storage.set(TodoListsService.KEY, this.toArray());
   }
 
+  public getCollection(): Promise<Map<number, TodoList>> {
+    return new Promise((resolve) => {
+      let todoLists: Array<any> = new Array<any>();
+
+      this.storage.get(TodoListsService.KEY).then((datas: Array<any>) => {
+        if (datas.length) {
+          datas.forEach((todoList: any, index: number) => {
+            let transformedUser: TodoList = new TodoList();
+            //transformedUser.transform(todoList);
+            this.add(transformedUser);
+          });
+        }
+
+        setTimeout(() => {
+          resolve(this.collection);
+          console.log('Users are ready ' + this.collection.size);
+        }, 2000);
+
+      });
+    });
+  }
   public toArray(): Array<any> {
     const values: Array<any> = new Array();
 
